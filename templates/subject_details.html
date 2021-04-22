@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1>Subject details:</h1>
+<h4>{{ subject.name }}</h4>
+<h4>Teachers: </h4>
+    <ul>
+    {% for teacher in teachers %}
+        <li>{{ teacher.name }}</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>

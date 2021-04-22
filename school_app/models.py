@@ -29,6 +29,7 @@ class Teacher(models.Model):
     name = models.CharField(max_length=64)
     lastname = models.CharField(max_length=64)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    bio = models.TextField(null=True)
 
 class Student(models.Model):
     name = models.CharField(max_length=64)

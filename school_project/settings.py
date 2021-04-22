@@ -15,12 +15,21 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Database
+#place your database settings in the local_settings.py file in project root folder
+try:
+    from school_project.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Database not configured")
+    print("Please provide Database details")
+    exit(0)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(as3zlc!r-6127b$&yw5!1t7&3$#bcxe59or&wxbzfqpp-+xgz'
+# Secret Key
+try:
+    from school_project.local_settings import SECRET_KEY
+except ModuleNotFoundError:
+    print("Secret key not provided, please provide secret key")
+    exit(0)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,14 +87,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'school_project.wsgi.application'
 
 
-# Database
-#place your database settings in the local_settings.py file in project root folder
-try:
-    from school_project.local_settings import DATABASES
-except ModuleNotFoundError:
-    print("Database not configured")
-    print("Please provide Database details")
-    exit(0)
+
 
 
 # Password validation

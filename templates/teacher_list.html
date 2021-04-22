@@ -5,10 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Subjects</h1>
+<h1>Our teachers:</h1>
 <ul>
-    {% for subject in subjects %}
-        <li><a href="{% url 'subject-details' subject.id %}">{{ subject.name }}</a></li>
+    {% for teacher in teachers %}
+        <li><a href=" {% url 'teacher-details' teacher.id %}">{{ teacher.name }}</a></li>
     {% endfor %}
 </ul>
 </body>

@@ -38,10 +38,24 @@ class SubjectDetails(APIView):
     template_name = 'subject_details.html'
 
     def get(self, request, id):
-        subject = Subject.objects.filter(pk=id)
-        return Response({'subject': subject})
+        subject = Subject.objects.get(id=id)
+        teachers = Teacher.objects.filter(subject=subject)
+        return Response({'subject': subject, 'teachers': teachers})
 
+class TeacherList(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'teacher_list.html'
 
+    def get(self, request):
+        teachers = Teacher.objects.all()
+        return Response({'teachers': teachers})
 
+class TeacherDetails(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'teacher_details.html'
+
+    def get(self, request, id):
+        teacher = Teacher.objects.get(id=id)
+        return Response({'teacher': teacher})
 
 
