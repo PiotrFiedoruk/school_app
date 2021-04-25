@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 
-from school_app.models import Subject, Teacher
+from school_app.models import Subject, Teacher, SchoolClass, Student
 from school_app.serializers import SubjectSerializer
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -58,4 +58,19 @@ class TeacherDetails(APIView):
         teacher = Teacher.objects.get(id=id)
         return Response({'teacher': teacher})
 
+class ClassList(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'class_list.html'
 
+    def get(self, request):
+        classes = SchoolClass.objects.all()
+        return Response({'classes': classes})
+
+class ClassDetails(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'class_details.html'
+
+    def get(self, request, id):
+        s_class = SchoolClass.objects.get(id=id)
+        students = Student.objects.filter(school_class=s_class)
+        return Response({'class': s_class, 'students': students})
